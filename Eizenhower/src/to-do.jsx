@@ -24,7 +24,6 @@ export const Todo = ({ urgency, importance }) => {
   return (
     <>
       <div className="p-1 md:p-3">
-        {/* Flex container for input and button */}
         <div className="flex w-full pl-1 mt-1 border border-gray-500 rounded-md justify-between items-center">
           <input
             className="p-1 w-11/12 outline-none"
