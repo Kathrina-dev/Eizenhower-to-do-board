@@ -8,7 +8,11 @@ async function main() {
             password: "securepassword123",
             tasks: {
                 create: [
-                    {task: "Complete this stupid project"}
+                    {
+                       task: "Complete this stupid project",
+                        isImportant: false,
+                        isUrgent: false,
+                    }
                 ],
             },
         },
