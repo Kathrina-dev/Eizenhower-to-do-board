@@ -10,7 +10,7 @@ export const Todo = ({ urgency, importance }) => {
 
   const getTask = () => {
     if (!userID) return;
-    axios.get(`http://localhost:8000/task?id=${userID}`)
+    axios.get(`https://eizenhower-to-do-board-backend.onrender.com/task?id=${userID}`)
     .then((response) => {
       const filtered = response.data.tasks.filter(
         (t) => t.isUrgent === urgency && t.isImportant === importance
@@ -23,7 +23,7 @@ export const Todo = ({ urgency, importance }) => {
 
   const addToDo = () => {
     if (task.trim()) {
-        axios.post(`http://localhost:8000/task?id=${userID}`, { 
+        axios.post(`https://eizenhower-to-do-board-backend.onrender.com/task?id=${userID}`, { 
           task,
           isImportant: importance,
           isUrgent: urgency,
@@ -49,7 +49,7 @@ export const Todo = ({ urgency, importance }) => {
 
 const deleteTask = (taskID, index) => {
   axios
-    .delete("http://localhost:8000/task", {data: { taskID }})
+    .delete("https://eizenhower-to-do-board-backend.onrender.com/task", {data: { taskID }})
     .then(() => {
       console.log(`Task ${taskID} deleted`);
       setTasks(tasks.filter((_, i) => i !== index));

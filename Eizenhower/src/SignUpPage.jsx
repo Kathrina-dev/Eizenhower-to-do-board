@@ -12,7 +12,7 @@ const Signup = ({ onSignup }) => {
     event.preventDefault();
     if (password == confirmPassword) {
       axios
-        .post("http://localhost:8000/signup", {
+        .post("https://eizenhower-to-do-board-backend.onrender.com/signup", {
           username: username,
           password: password,
         })
