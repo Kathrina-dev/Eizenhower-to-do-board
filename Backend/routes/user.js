@@ -1,6 +1,6 @@
-const express = require ("express");
-const bcrypt = require ("bcrypt")
-const prisma = require("../prisma/prisma");
+import express from "express";
+import bcrypt from "bcrypt";
+import prisma from "../prisma/prisma.js";
 
 const router = express.Router();
 
@@ -59,4 +59,4 @@ router.route("/login")
         }
     })
 
-module.exports = router
+export const userRoutes = router;

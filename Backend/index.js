@@ -1,23 +1,41 @@
-const express = require ('express');
-const cors = require("cors");
-// const {isLoggedIn} = require ('./middleswares')
-const userRouter = require ('./routes/user.js');
-const taskRouter = require ('./routes/task.js')
+import express from "express";
+import cors from "cors";
+import  userRoutes  from "./routes/user.js";
+import  taskRoutes  from "./routes/task.js";
+import { createUserOnStart } from "./server.js";
 
-//Connect Database here
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
-//Connect Frontend and Backend port here
-app.use(cors());
+// CORS configuration
+app.use(cors({
+  origin: [
+    "http://localhost:5174",
+    "https://eizenhower-to-do-board.onrender.com"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 
-//Middlewares
-app.use(express.urlencoded({extended: false}));
+// Middlewares
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// Routes
+app.use("/users", userRoutes);
+app.use("/tasks", taskRoutes);
 
-//Routes
-app.use("/", userRouter);
-app.use("/", taskRouter)
+app.get("/", (req, res) => {
+  res.send("✅ Server is running!");
+});
 
-app.listen(PORT, () => console.log(`Server started at port: ${PORT}`))
+// Initialize database, then start server
+createUserOnStart()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.error("❌ Failed to initialize DB:", err);
+  });

@@ -1,5 +1,5 @@
-const express = require("express");
-const prisma = require("../prisma/prisma");
+import express from "express";
+import prisma from "../prisma/prisma.js";
 
 const router = express.Router();
 
@@ -68,4 +68,4 @@ router.route("/task")
         }
     });
 
-module.exports = router;
+export const taskRoutes = router;
