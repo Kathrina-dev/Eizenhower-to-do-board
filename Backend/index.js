@@ -23,8 +23,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Routes
-app.use("/users", userRoutes);
-app.use("/tasks", taskRoutes);
+app.use("/", userRoutes);
+app.use("/task", taskRoutes);
 
 app.get("/", (req, res) => {
   res.send("✅ Server is running!");
