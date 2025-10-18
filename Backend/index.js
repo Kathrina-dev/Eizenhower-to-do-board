@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-import  userRoutes  from "./routes/user.js";
-import  taskRoutes  from "./routes/task.js";
+import { userRoutes } from "./routes/user.js";
+import { taskRoutes } from "./routes/task.js";
 import { createUserOnStart } from "./server.js";
 import { isLoggedIn } from "./middleswares/index.js";
 
