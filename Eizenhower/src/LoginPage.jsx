@@ -67,16 +67,16 @@ const LoginPage = ({ onLogin }) => {
       </form>
 
       <div className="text-center mt-4">
-          <p className="text-sm text-gray-600">
-            Don’t have an account?{" "}
-            <a
-              href="https://eizenhower-to-do-board.onrender.com/signup"
-              className="text-blue-500 hover:underline"
-            >
-              Register here
-            </a>
-          </p>
-        </div>
+        <p className="text-sm text-gray-600">
+          Don’t have an account?{" "}
+          <button
+            onClick={() => navigate('/signup')}
+            className="text-blue-500 hover:underline"
+          >
+            Register here
+          </button>
+        </p>
+      </div>
     </div>
   );
 };
