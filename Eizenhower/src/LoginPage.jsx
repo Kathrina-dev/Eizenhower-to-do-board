@@ -70,7 +70,7 @@ const LoginPage = ({ onLogin }) => {
           <p className="text-sm text-gray-600">
             Don’t have an account?{" "}
             <a
-              href="https://eizenhower-to-do-board-backend.onrender.com/signup"
+              href="https://eizenhower-to-do-board.onrender.com/signup"
               className="text-blue-500 hover:underline"
             >
               Register here
