@@ -9,7 +9,11 @@ export const Todo = ({ urgency, importance }) => {
   const { userID } = useAuth();
 
   const getTask = () => {
-    if (!userID) return;
+    if (!userID) {
+      console.log("getTask called, userID =", userID);
+      console.warn("getTask aborted: userID is null or undefined");
+      return;
+    }
     axios.get(`https://eizenhower-to-do-board-backend.onrender.com/task?id=${userID}`)
     .then((response) => {
       const filtered = response.data.tasks.filter(
@@ -22,22 +26,23 @@ export const Todo = ({ urgency, importance }) => {
   }
 
   const addToDo = () => {
+    console.log("addToDo called, userID =", userID, "task =", task);
     if (task.trim()) {
-        axios.post(`https://eizenhower-to-do-board-backend.onrender.com/task?id=${userID}`, { 
-          task,
-          isImportant: importance,
-          isUrgent: urgency,
-        })
-        .then((response) => {
-          console.log("Task created:", response.data);
-          const { taskID, task: createdTask } = response.data;
-          setTasks([...tasks, createdTask]);
-          setTask("");
-        })
-        .catch((error) => {
-          console.log("Adding task for user:", userID);
-          console.error("Error creating task:", error);
-        });
+      axios.post(`https://eizenhower-to-do-board-backend.onrender.com/task?id=${userID}`, { 
+        task,
+        isImportant: importance,
+        isUrgent: urgency,
+      })
+      .then((response) => {
+        console.log("Task created:", response.data);
+        const { taskID, task: createdTask } = response.data;
+        setTasks([...tasks, createdTask]);
+        setTask("");
+      })
+      .catch((error) => {
+        console.log("Adding task for user:", userID);
+        console.error("Error creating task:", error);
+      });
     }
   };
 
@@ -48,6 +53,7 @@ export const Todo = ({ urgency, importance }) => {
   };
 
 const deleteTask = (taskID, index) => {
+  console.log("deleteTask called, taskID =", taskID);
   axios
     .delete("https://eizenhower-to-do-board-backend.onrender.com/task", {data: { taskID }})
     .then(() => {
@@ -60,6 +66,7 @@ const deleteTask = (taskID, index) => {
 }
 
 useEffect(() => {
+  console.log("useEffect triggered, userID =", userID);
   if (userID !== null) {
     getTask();
   }
