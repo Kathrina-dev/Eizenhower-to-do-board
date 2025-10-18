@@ -60,7 +60,7 @@ const deleteTask = (taskID, index) => {
 }
 
 useEffect(() => {
-  if (userID) {
+  if (userID !== null) {
     getTask();
   }
 }, [userID]);
