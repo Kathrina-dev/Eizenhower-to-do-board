@@ -1,9 +1,20 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
+import cors from "cors";
+import authRoutes from "./routes/auth.js";
 
 const prisma = new PrismaClient();
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+app.use(cors({
+  origin: ["http://localhost:5174", "https://eizenhower-to-do-board.onrender.com"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
+
+app.use(express.json());
+app.use("/", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("✅ Server is running!");
