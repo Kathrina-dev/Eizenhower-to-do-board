@@ -24,7 +24,7 @@ app.use(express.json());
 
 // Routes
 app.use("/", userRoutes);
-app.use("/task", taskRoutes);
+app.use("/", taskRoutes);
 
 app.get("/", (req, res) => {
   res.send("✅ Server is running!");

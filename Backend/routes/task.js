@@ -3,7 +3,7 @@ import prisma from "../prisma/prisma.js";
 
 const router = express.Router();
 
-router.route("/")
+router.route("/task")
   .get(async (req, res) => {
     try {
       const userID = parseInt(req.query.id);
