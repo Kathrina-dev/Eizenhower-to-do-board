@@ -3,7 +3,7 @@ import cors from "cors";
 import  userRoutes  from "./routes/user.js";
 import  taskRoutes  from "./routes/task.js";
 import { createUserOnStart } from "./server.js";
-import { isLoggedIn } from "./middlewares/index.js";
+import { isLoggedIn } from "./middleswares/index.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
