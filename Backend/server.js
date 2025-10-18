@@ -2,9 +2,13 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function main() {
+    const count = await prisma.user.count({
+        where: { username: { startsWith: 'JohnDoe' } },
+    });
+    const newUsername = `JohnDoe${count + 1}`;
     const newUser = await prisma.user.create({
         data: {
-            username: "JohnDoe",
+            username: newUsername,
             password: "securepassword123",
             tasks: {
                 create: [
@@ -24,8 +28,7 @@ async function main() {
 
 main()
 .catch((e) => {
-    console.error(e);
-    process.exit(1);
+    console.error('❌ Error during user creation:', err);
 })
 .finally(async () => {
     await prisma.$disconnect
