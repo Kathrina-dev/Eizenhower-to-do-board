@@ -3,6 +3,7 @@ import cors from "cors";
 import  userRoutes  from "./routes/user.js";
 import  taskRoutes  from "./routes/task.js";
 import { createUserOnStart } from "./server.js";
+import { isLoggedIn } from "./middlewares/index.js";
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -27,6 +28,10 @@ app.use("/tasks", taskRoutes);
 
 app.get("/", (req, res) => {
   res.send("✅ Server is running!");
+});
+
+app.get("/protected", isLoggedIn(), (req, res) => {
+    res.send("✅ You are logged in!");
 });
 
 // Initialize database, then start server
