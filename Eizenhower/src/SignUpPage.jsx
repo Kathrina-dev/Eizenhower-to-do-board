@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './context/AuthContext';
 
 const Signup = ({ onSignup }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSignup = (event) => {
     event.preventDefault();
@@ -22,7 +24,7 @@ const Signup = ({ onSignup }) => {
           setUsername('');
           setPassword('');
           setConfirmPassword('');
-          axios.defaults.headers['id'] = response.data.id;
+          login(response.data.id);
           navigate('/task');
         })
         .catch((error) => {
